@@ -4,39 +4,40 @@ import { Link } from "@reach/router";
 
 const ArtPiece = ({ name, date, more, image, artist, id }) => {
   return (
-    <Link
+    <div
       css={css`
+        background-color: #ededf2;
+        padding-top: 12.5px;
+        text-align: center;
+        width: 250px;
+        border-radius: 10px;
+        margin: 35px auto;
         text-decoration: none;
+
+        .title {
+          font-weight: bold;
+          padding: 10px 10px 0px;
+        }
+        .date {
+          font-size: 11px;
+        }
+
+        .artist {
+          margin-bottom: 15px;
+          font-size: 15px;
+        }
+        &:hover {
+          cursor: pointer;
+          opacity: 75%;
+        }
       `}
-      to={`/${id}`}
     >
-      <div
+      <Link
         css={css`
-          background-color: #ededf2;
-          color: #000;
-          padding-top: 12.5px;
-          text-align: center;
-          width: 250px;
-          border-radius: 15px;
-          margin: 35px auto;
           text-decoration: none;
-
-          .title {
-            font-weight: bold;
-            padding: 10px 10px 0px;
-          }
-          .date {
-            font-size: 11px;
-          }
-
-          .artist {
-            margin-bottom: 15px;
-            font-size: 15px;
-          }
-          &:hover {
-            cursor: pointer;
-          }
+          color: #000;
         `}
+        to={`/${id}`}
       >
         <div className="title">
           {!name
@@ -50,15 +51,15 @@ const ArtPiece = ({ name, date, more, image, artist, id }) => {
         <div>{more ? <a href={more}>Learn more here</a> : ""}</div>
         <img
           css={css`
-            border-radius: 0px 0px 15px 15px;
+            border-radius: 0px 0px 10px 10px;
           `}
           src={image}
           alt={name}
           width="250"
           height="275"
         />
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

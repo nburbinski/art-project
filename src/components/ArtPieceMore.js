@@ -5,26 +5,32 @@ import { Link } from "@reach/router";
 const ArtPiece = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [details, setDetails] = useState({});
+
   useEffect(() => {
+    let mounted = true;
     async function getArt() {
       setIsLoading(true);
-      console.log("searching");
       const res = await fetch(
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
       );
       const art = await res.json();
-      setDetails({
-        id: art.objectID,
-        name: art.title,
-        date: art.objectDate,
-        image: art.primaryImage,
-        artist: art.artistDisplayName,
-        department: art.department,
-      });
-      setIsLoading(false);
+
+      if (mounted) {
+        setDetails({
+          id: art.objectID,
+          name: art.title,
+          date: art.objectDate,
+          image: art.primaryImage,
+          artist: art.artistDisplayName,
+          department: art.department,
+        });
+        setIsLoading(false);
+      }
     }
 
     getArt();
+
+    return () => (mounted = false);
   }, []);
 
   return (

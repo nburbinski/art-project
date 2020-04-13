@@ -10,27 +10,32 @@ const ArtDetailsPage = (props) => {
 
   // Get details
   useEffect(() => {
+    let mounted = true;
     async function getArt() {
       setIsLoading(true);
       const res = await fetch(
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${props.id}`
       );
       const art = await res.json();
-      setDetails({
-        id: art.objectID,
-        name: art.title,
-        date: art.objectDate,
-        image: art.primaryImage,
-        artist: art.artistDisplayName,
-        department: art.department,
-      });
-      setIsLoading(false);
+      if (mounted) {
+        setDetails({
+          id: art.objectID,
+          name: art.title,
+          date: art.objectDate,
+          image: art.primaryImage,
+          artist: art.artistDisplayName,
+          department: art.department,
+        });
+        setIsLoading(false);
+      }
     }
 
     getArt();
+    return () => (mounted = false);
   }, [props.id]);
 
   useEffect(() => {
+    let mounted = true;
     async function getArt() {
       setIsMoreLoading(true);
       const res = await fetch(
@@ -38,11 +43,18 @@ const ArtDetailsPage = (props) => {
         `
       );
       const list = await res.json();
-      setMore(list.objectIDs.slice(0, 5));
-      setIsMoreLoading(false);
+      if (mounted) {
+        if (!list.objectIDs) {
+          setIsMoreLoading(false);
+          return () => (mounted = false);
+        }
+        setMore(list.objectIDs.slice(0, 5));
+        setIsMoreLoading(false);
+      }
     }
 
     getArt();
+    return () => (mounted = false);
   }, [details]);
 
   if (isLoading) {

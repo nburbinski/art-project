@@ -6,12 +6,14 @@ import ArtPiece from "./ArtPiece";
 
 const Arts = () => {
   const [artists, setArtists] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadMore, setLoadMore] = useState(false);
 
   // Get art
   useEffect(() => {
+    let mounted = true;
+
     async function getArt() {
-      setIsLoading(true);
       let pieces = [];
       for (let i = 0; i < 10; i++) {
         const res = await fetch(
@@ -28,19 +30,23 @@ const Arts = () => {
           artist: art.artistDisplayName,
         });
       }
-      setArtists(pieces);
-
-      setIsLoading(false);
+      if (mounted) {
+        setArtists(artists.concat(pieces));
+        setIsLoading(false);
+        setLoadMore(false);
+      }
     }
 
     getArt();
-  }, []);
+    return () => (mounted = false);
+  }, [loadMore]);
 
   if (isLoading) {
     return (
       <main
         css={css`
           padding: 2%;
+          box-sizing: border-box;
         `}
       >
         Loading Art...
@@ -55,6 +61,32 @@ const Arts = () => {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         justify-content: center;
         text-align: center;
+
+        .more-art {
+          text-align: center;
+          width: 250px;
+          margin: auto;
+          text-decoration: none;
+          align-items: center;
+          justify-content: end;
+
+          button {
+            margin-top: 15px;
+            display: inline-block;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0;
+            text-decoration: none;
+            color: #000;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 250ms ease-in-out, transform 150ms ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border-radius: 5px;
+          }
+        }
       `}
     >
       {artists.map((artist) => (
@@ -68,6 +100,10 @@ const Arts = () => {
           artist={artist.artist}
         />
       ))}
+      <div className="more-art">
+        {loadMore ? <div>Loading Art...</div> : ""}
+        <button onClick={() => setLoadMore(true)}>Load more...</button>
+      </div>
     </main>
   );
 };
