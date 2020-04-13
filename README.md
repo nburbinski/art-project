@@ -1,3 +1,3 @@
 # art-project
 
-A project that will use the Mets API do display and search popular art pieces
+A project that will use the Mets API to display and search popular art pieces
