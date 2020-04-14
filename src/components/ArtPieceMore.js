@@ -38,7 +38,7 @@ const ArtPiece = ({ id }) => {
       css={css`
         text-decoration: none;
       `}
-      to={`/${id}`}
+      to={`/art/${id}`}
     >
       <div
         css={css`

@@ -56,19 +56,20 @@ const Arts = () => {
   return (
     <main
       css={css`
-        padding: 20px 2.5%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 1%;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         text-align: center;
 
         .more-art {
           text-align: center;
-          width: 250px;
-          margin: auto;
+          justify-content: flex-end;
           text-decoration: none;
           align-items: center;
-          justify-content: end;
+          flex: 0 0 100%;
+          margin-bottom: 1%;
+          margin-top: 1%;
 
           button {
             margin-top: 15px;

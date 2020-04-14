@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { css } from "@emotion/core";
-import { Link } from "@reach/router";
 import ArtPieceMore from "./ArtPieceMore";
 
-const ArtDetailsPage = (props) => {
+const ArtistPage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isMoreLoading, setIsMoreLoading] = useState(false);
   const [details, setDetails] = useState({});
@@ -90,23 +89,15 @@ const ArtDetailsPage = (props) => {
 
         ul {
           display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
           padding-left: 0;
+          justify-content: space-between;
           li {
             list-style: none;
-            margin-bottom: 15px;
-            margin-right: 2.5%;
           }
         }
 
         h3 {
           text-align: start;
-        }
-
-        a {
-          text-decoration: none;
-          color: #000;
         }
       `}
     >
@@ -114,9 +105,7 @@ const ArtDetailsPage = (props) => {
       <p>By {details.artist}</p>
       <img src={details.image}></img>
 
-      <Link to={`/artist/${details.artist}`}>
-        <h3>More by this artist</h3>
-      </Link>
+      <h3>More by this artist</h3>
       <ul>
         {more.map((art) => (
           <li key={art}>
@@ -128,4 +117,4 @@ const ArtDetailsPage = (props) => {
   );
 };
 
-export default ArtDetailsPage;
+export default ArtistPage;

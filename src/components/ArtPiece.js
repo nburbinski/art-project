@@ -9,10 +9,11 @@ const ArtPiece = ({ name, date, more, image, artist, id }) => {
         background-color: #ededf2;
         padding-top: 12.5px;
         text-align: center;
-        width: 250px;
         border-radius: 10px;
-        margin: 35px auto;
+        margin-left: 2%;
+        margin-bottom: 2%;
         text-decoration: none;
+        flex: 0 0 10%;
 
         .title {
           font-weight: bold;
@@ -37,7 +38,7 @@ const ArtPiece = ({ name, date, more, image, artist, id }) => {
           text-decoration: none;
           color: #000;
         `}
-        to={`/${id}`}
+        to={`/art/${id}`}
       >
         <div className="title">
           {!name
@@ -53,7 +54,11 @@ const ArtPiece = ({ name, date, more, image, artist, id }) => {
           css={css`
             border-radius: 0px 0px 10px 10px;
           `}
-          src={image}
+          src={
+            image
+              ? image
+              : "https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg"
+          }
           alt={name}
           width="250"
           height="275"
