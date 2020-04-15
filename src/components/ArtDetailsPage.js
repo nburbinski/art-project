@@ -85,7 +85,7 @@ const ArtDetailsPage = (props) => {
           margin-top: 0;
         }
         img {
-          width: 50%;
+          width: 75%;
         }
 
         ul {
@@ -118,6 +118,7 @@ const ArtDetailsPage = (props) => {
         <h3>More by this artist</h3>
       </Link>
       <ul>
+        {more ? "" : "none found..."}
         {more.map((art) => (
           <li key={art}>
             <ArtPieceMore id={art} />

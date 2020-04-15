@@ -23,8 +23,8 @@ const SearchResult = ({ id }) => {
     return () => (mounted = false);
   }, []);
   return (
-    <Link to={`/${id}`}>
-      <div>
+    <Link to={`/art/${id}`}>
+      <div className="result">
         {!result.name
           ? ""
           : result.name.length > 25

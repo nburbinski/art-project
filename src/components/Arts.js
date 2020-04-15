@@ -3,6 +3,7 @@ import { css } from "@emotion/core";
 import "regenerator-runtime/runtime.js";
 
 import ArtPiece from "./ArtPiece";
+import { colors } from "../colors";
 
 const Arts = () => {
   const [artists, setArtists] = useState([]);
@@ -17,11 +18,16 @@ const Arts = () => {
       let pieces = [];
       for (let i = 0; i < 10; i++) {
         const res = await fetch(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${
-            438814 + i
-          }`
+          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${Math.floor(
+            Math.random() * 80000
+          )}`
         );
         const art = await res.json();
+        if (!art.primaryImage) {
+          i -= 1;
+          continue;
+        }
+
         pieces.push({
           id: art.objectID,
           name: art.title,
@@ -49,7 +55,7 @@ const Arts = () => {
           box-sizing: border-box;
         `}
       >
-        Loading Art...
+        Searching for Random Art...
       </main>
     );
   }
@@ -71,6 +77,10 @@ const Arts = () => {
           margin-bottom: 1%;
           margin-top: 1%;
 
+          div {
+            margin-bottom: 5px;
+          }
+
           button {
             margin-top: 15px;
             display: inline-block;
@@ -78,7 +88,7 @@ const Arts = () => {
             padding: 1rem 2rem;
             margin: 0;
             text-decoration: none;
-            color: #000;
+            color: ${colors.primary};
             font-size: 1rem;
             cursor: pointer;
             text-align: center;
@@ -102,7 +112,7 @@ const Arts = () => {
         />
       ))}
       <div className="more-art">
-        {loadMore ? <div>Loading Art...</div> : ""}
+        {loadMore ? <div> Searching for Random Art...</div> : ""}
         <button onClick={() => setLoadMore(true)}>Load more...</button>
       </div>
     </main>

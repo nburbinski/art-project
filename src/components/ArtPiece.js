@@ -2,11 +2,15 @@ import React from "react";
 import { css } from "@emotion/core";
 import { Link } from "@reach/router";
 
+import { colors } from "../colors";
+
 const ArtPiece = ({ name, date, more, image, artist, id }) => {
   return (
     <div
       css={css`
-        background-color: #ededf2;
+        background-color: ${colors.secondary};
+        color: ${colors.primary};
+        box-sizing: border-box;
         padding-top: 12.5px;
         text-align: center;
         border-radius: 10px;
@@ -36,7 +40,7 @@ const ArtPiece = ({ name, date, more, image, artist, id }) => {
       <Link
         css={css`
           text-decoration: none;
-          color: #000;
+          color: ${colors.primary};
         `}
         to={`/art/${id}`}
       >
