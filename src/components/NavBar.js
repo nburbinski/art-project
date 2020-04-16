@@ -89,7 +89,7 @@ const NavBar = () => {
       `}
     >
       <Link to="/">
-        <h1>ARTSY FARTSY</h1>
+        <h1>ARTSY PROJECT</h1>
       </Link>
       <div>
         <div className="search">
